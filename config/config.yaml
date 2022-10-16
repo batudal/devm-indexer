@@ -5,8 +5,9 @@ rest:
 # indexer
 indexer:
   address: ":1481"
-  token: "mysecret"
-  endpoint: "http://decoded.wtf"
+  host: "http://localhost"
+  # token: "mysecret"
+  endpoint: "http://localhost:1453"
   limiter:
     rate: 3
     duration: "1s"

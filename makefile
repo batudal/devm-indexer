@@ -1,5 +1,5 @@
 rest:
-	go run cmd/rest/main.go -c config/config.yaml
+	go run rest/main.go -c config/config.yaml
 
 indexer:
-	go run cmd/indexer/main.go -c config/config.yaml
+	go run indexer/main.go -c config/config.yaml
