@@ -1,10 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 
-	"github.com/twiny/blockscan/cmd/indexer/api"
+	"devm/indexer/indexer/api"
 
 	"github.com/urfave/cli/v2"
 )
@@ -28,8 +29,9 @@ func main() {
 			if err != nil {
 				return err
 			}
-
+			fmt.Println("test 1")
 			go app.Shutdown()
+			fmt.Println("test 2")
 
 			return app.Start()
 		},
