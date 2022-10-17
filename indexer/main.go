@@ -25,13 +25,14 @@ func main() {
 			},
 		},
 		Action: func(c *cli.Context) error {
+			fmt.Println("action")
 			app, err := api.NewIndexer(c.String("config"))
 			if err != nil {
 				return err
 			}
-			fmt.Println("test 1")
+			fmt.Println("preshutdown")
 			go app.Shutdown()
-			fmt.Println("test 2")
+			fmt.Println("prestart")
 
 			return app.Start()
 		},

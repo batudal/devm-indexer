@@ -3,7 +3,6 @@ rest:
   address: ":1480"
 
 # indexer
-# indexer configuration
 indexer:
   address: ":1481"
   host: "http://localhost"
