@@ -37,8 +37,10 @@ func main() {
 			return app.Start()
 		},
 	}
-
+	fmt.Println("prerun")
 	if err := app.Run(os.Args); err != nil {
+		fmt.Println("postrun")
+
 		log.Println(err)
 		return
 	}
