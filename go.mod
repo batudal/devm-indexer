@@ -7,7 +7,6 @@ require (
 	github.com/go-chi/chi/v5 v5.0.7
 	github.com/mattn/go-sqlite3 v1.14.15
 	github.com/shopspring/decimal v1.3.1
-	github.com/twiny/blockscan v0.0.0-20221013084547-ced28cfde820
 	github.com/twiny/ratelimit v0.0.0-20220509163414-256d3376b0ac
 	github.com/urfave/cli/v2 v2.19.2
 	gopkg.in/yaml.v3 v3.0.1
