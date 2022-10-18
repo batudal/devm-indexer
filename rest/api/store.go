@@ -14,6 +14,8 @@ type StoreReader interface {
 	GetBlock(ctx context.Context, n int64) (*chain.Block, error)
 	//
 	GetLatestTx(ctx context.Context) (*chain.Tx, error)
+	GetLatestTxs(ctx context.Context, n int64) (*chain.Stats, error)
+
 	GetTx(ctx context.Context, hash string) (*chain.Tx, error)
 	//
 	GetStats(ctx context.Context, i, j int64) (*chain.Stats, error)

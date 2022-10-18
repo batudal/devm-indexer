@@ -14,6 +14,9 @@ import (
 
 // indexer
 func (idx *Indexer) indexer() {
+	idx.subscribe()
+	idx.subscribed = true
+
 	idx.wg.Add(idx.conf.Indexer.Workers)
 
 	for i := 0; i < idx.conf.Indexer.Workers; i++ {
@@ -30,15 +33,8 @@ func (idx *Indexer) indexer() {
 						idx.log.Println(err)
 						continue
 					}
-
-					// check if newer than current head block
-					if !idx.subscribed && i >= idx.head {
-						// subcribe
-						idx.subscribe()
-
+					if i > idx.head {
 						idx.head = i
-
-						idx.subscribed = true
 					}
 
 					// log
@@ -62,7 +58,6 @@ func (idx *Indexer) subscribe() {
 	idx.wg.Add(1)
 	go func() {
 		defer idx.wg.Done()
-
 		//  log
 		idx.log.Println("subscribed to new block")
 		for {

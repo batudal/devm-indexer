@@ -35,6 +35,8 @@ func (a *API) routes() {
 
 		//
 		r.Get("/tx", a.handleGetLatestTx)
+		r.Get("/txs/{quantity}", a.handleGetLatestTxs)
+
 		r.Get("/tx/{hash}", a.handleGetTx)
 	})
 }

@@ -171,6 +171,23 @@ func (a *API) handleGetLatestTx(w http.ResponseWriter, r *http.Request) {
 	a.writer(w, http.StatusOK, tx)
 }
 
+// handleGetLatestTxs
+func (a *API) handleGetLatestTxs(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	var quantity int64
+	fmt.Sscan(chi.URLParam(r, "quantity"), &quantity)
+
+	tx, err := a.store.GetLatestTxs(ctx, quantity)
+
+	if err != nil {
+		a.writer(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	a.writer(w, http.StatusOK, tx)
+}
+
 // handleGetTx
 func (a *API) handleGetTx(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()

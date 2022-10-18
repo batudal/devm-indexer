@@ -187,6 +187,42 @@ func (s *SQLite) GetLatestTx(ctx context.Context) (*chain.Tx, error) {
 	return &t, nil
 }
 
+// GetLatestTxs
+func (s *SQLite) GetLatestTxs(ctx context.Context, n int64) (*chain.Stats, error) {
+
+	var status = &chain.Stats{
+		Txs:         []string{},
+		TotalAmount: 0,
+	}
+
+	rows, err := s.db.QueryContext(ctx, selectLatestTxs, n)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			return status, nil
+		}
+		return nil, err
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var t chain.Tx
+		if err := rows.Scan(&t.Hash,
+			&t.BlockNumber,
+			&t.From,
+			&t.To,
+			&t.Amount,
+			&t.Nonce,
+			&t.Timestamp,
+			&t.Order); err != nil {
+			return nil, err
+		}
+
+		status.Txs = append(status.Txs, t.Hash)
+	}
+
+	return status, nil
+}
+
 // GetTx
 func (s *SQLite) GetTx(ctx context.Context, hash string) (*chain.Tx, error) {
 	var t chain.Tx

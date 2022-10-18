@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -25,22 +24,16 @@ func main() {
 			},
 		},
 		Action: func(c *cli.Context) error {
-			fmt.Println("action")
 			app, err := api.NewIndexer(c.String("config"))
 			if err != nil {
 				return err
 			}
-			fmt.Println("preshutdown")
 			go app.Shutdown()
-			fmt.Println("prestart")
 
 			return app.Start()
 		},
 	}
-	fmt.Println("prerun")
 	if err := app.Run(os.Args); err != nil {
-		fmt.Println("postrun")
-
 		log.Println(err)
 		return
 	}

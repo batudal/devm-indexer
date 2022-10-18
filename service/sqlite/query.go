@@ -61,6 +61,32 @@ ORDER BY
 LIMIT 1
 `
 
+const selectLatestTxs = `
+SELECT
+	t1.tx_hash,
+	t1.block_number,
+	t1.tx_from,
+	t1.tx_to,
+	t1.amount,
+	t1.nonce,
+	t1.mined_timestamp,
+	t1.tx_order
+FROM
+	transactions t1
+WHERE
+	t1.block_number = (
+		SELECT
+			b1.block_number
+		FROM
+			blocks b1
+		ORDER BY
+			b1.mined_timestamp DESC
+		LIMIT 1)
+ORDER BY
+	t1.tx_order DESC
+LIMIT ?
+`
+
 const selectTx = `
 SELECT
 	t1.tx_hash,
