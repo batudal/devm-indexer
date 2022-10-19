@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"time"
 
 	"devm/indexer/pkg/chain"
 
@@ -216,7 +217,7 @@ func (s *SQLite) GetLatestTxs(ctx context.Context, n int64) (*chain.Txs, error) 
 			&t.Order); err != nil {
 			return nil, err
 		}
-		status.Tss = append(status.Tss, t.Timestamp.Format("Mon Jan 2 15:04:05 MST 2006"))
+		status.Tss = append(status.Tss, t.Timestamp.Format(time.RFC822))
 		status.Txs = append(status.Txs, t.Hash)
 	}
 
