@@ -54,7 +54,6 @@ type Indexer struct {
 
 // NewIndexer
 func NewIndexer(path string) (*Indexer, error) {
-	fmt.Println("indexer")
 
 	conf, err := config.ParseConfig(path)
 	if err != nil {
@@ -78,11 +77,13 @@ func NewIndexer(path string) (*Indexer, error) {
 	if err := store.Migrate("up"); err != nil {
 		return nil, err
 	}
+	fmt.Println("preclient")
 
 	client, err := ethclient.Dial(conf.Indexer.Endpoint)
 	if err != nil {
 		return nil, err
 	}
+	fmt.Println("postclient")
 
 	// get current latest block
 	latest, err := client.BlockByNumber(context.Background(), nil) // TODO: timeout context
