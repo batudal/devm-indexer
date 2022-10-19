@@ -34,6 +34,7 @@ func (a *API) routes() {
 		r.Get("/stats/{range}", a.handleGetRangeStats)
 
 		//
+		r.Get("/tx_count", a.handleGetTotalTxs)
 		r.Get("/tx", a.handleGetLatestTx)
 		r.Get("/txs/{quantity}", a.handleGetLatestTxs)
 

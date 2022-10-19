@@ -188,6 +188,27 @@ func (s *SQLite) GetLatestTx(ctx context.Context) (*chain.Tx, error) {
 	return &t, nil
 }
 
+// GetTotalTxs
+func (s *SQLite) GetTotalTxs(ctx context.Context) {
+	query, err := s.db.PrepareContext(ctx, countAllTxs)
+	if err != nil {
+		fmt.Printf("%s", err)
+	}
+	defer query.Close()
+
+	var output string
+	err = query.QueryRow().Scan(&output)
+
+	switch {
+	case err == sql.ErrNoRows:
+		fmt.Printf("No transactions in db.")
+	case err != nil:
+		fmt.Printf("%s", err)
+	default:
+		fmt.Printf("Counted %s transactions\n", output)
+	}
+}
+
 // GetLatestTxs
 func (s *SQLite) GetLatestTxs(ctx context.Context, n int64) (*chain.Txs, error) {
 

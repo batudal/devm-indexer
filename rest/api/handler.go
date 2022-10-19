@@ -188,6 +188,12 @@ func (a *API) handleGetLatestTxs(w http.ResponseWriter, r *http.Request) {
 	a.writer(w, http.StatusOK, tx)
 }
 
+// handleGetTotalTxs
+func (a *API) handleGetTotalTxs(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	a.store.GetTotalTxs(ctx)
+}
+
 // handleGetTx
 func (a *API) handleGetTx(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
