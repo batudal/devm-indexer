@@ -47,8 +47,6 @@ func (idx *Indexer) indexer() {
 
 // Subscribe
 func (idx *Indexer) subscribe() {
-	fmt.Println("Subscribing...")
-
 	sub, err := idx.client.SubscribeNewHead(context.Background(), idx.events)
 	if err != nil {
 		idx.log.Println(err)

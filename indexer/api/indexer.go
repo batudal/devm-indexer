@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 	_ "embed"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -77,13 +76,11 @@ func NewIndexer(path string) (*Indexer, error) {
 	if err := store.Migrate("up"); err != nil {
 		return nil, err
 	}
-	fmt.Println("preclient")
 
 	client, err := ethclient.Dial(conf.Indexer.Endpoint)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("postclient")
 
 	// get current latest block
 	latest, err := client.BlockByNumber(context.Background(), nil) // TODO: timeout context
