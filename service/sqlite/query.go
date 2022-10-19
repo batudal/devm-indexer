@@ -1,6 +1,12 @@
 package sqlite
 
 // // Rest \\ \\
+const countAllTxs = `
+SELECT
+	COUNT(*)
+FROM
+	transactions t1
+`
 const selectLatestBlock = `
 SELECT
 	b1.block_number,
