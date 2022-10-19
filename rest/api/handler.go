@@ -191,7 +191,12 @@ func (a *API) handleGetLatestTxs(w http.ResponseWriter, r *http.Request) {
 // handleGetTotalTxs
 func (a *API) handleGetTotalTxs(w http.ResponseWriter, r *http.Request) {
 	ctx := r.Context()
-	a.store.GetTotalTxs(ctx)
+	qty, err := a.store.GetTotalTxs(ctx)
+	if err != nil {
+		a.writer(w, http.StatusInternalServerError, err.Error())
+		return
+	}
+	a.writer(w, http.StatusOK, qty)
 }
 
 // handleGetTx
