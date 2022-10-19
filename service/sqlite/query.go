@@ -74,7 +74,7 @@ SELECT
 FROM
 	transactions t1
 ORDER BY
-	t1.tx_order DESC
+	t1.mined_timestamp DESC
 LIMIT ?
 `
 
