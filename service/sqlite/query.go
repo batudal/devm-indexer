@@ -73,15 +73,6 @@ SELECT
 	t1.tx_order
 FROM
 	transactions t1
-WHERE
-	t1.block_number = (
-		SELECT
-			b1.block_number
-		FROM
-			blocks b1
-		ORDER BY
-			b1.mined_timestamp DESC
-		LIMIT 1)
 ORDER BY
 	t1.tx_order DESC
 LIMIT ?

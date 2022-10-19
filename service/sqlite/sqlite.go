@@ -188,11 +188,11 @@ func (s *SQLite) GetLatestTx(ctx context.Context) (*chain.Tx, error) {
 }
 
 // GetLatestTxs
-func (s *SQLite) GetLatestTxs(ctx context.Context, n int64) (*chain.Stats, error) {
+func (s *SQLite) GetLatestTxs(ctx context.Context, n int64) (*chain.Txs, error) {
 
-	var status = &chain.Stats{
-		Txs:         []string{},
-		TotalAmount: 0,
+	var status = &chain.Txs{
+		Txs: []string{},
+		Tss: []string{},
 	}
 
 	rows, err := s.db.QueryContext(ctx, selectLatestTxs, n)
@@ -216,7 +216,7 @@ func (s *SQLite) GetLatestTxs(ctx context.Context, n int64) (*chain.Stats, error
 			&t.Order); err != nil {
 			return nil, err
 		}
-
+		status.Tss = append(status.Tss, t.Timestamp.Format("Mon Jan 2 15:04:05 MST 2006"))
 		status.Txs = append(status.Txs, t.Hash)
 	}
 
